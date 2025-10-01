@@ -1,0 +1,60 @@
+# Simplified Rules for Healthcare Triage Chatbot
+# GitHub Repository: https://github.com/user/healthcare-chatbot
+# MSc AI Assignment - Conflict-Free Rules
+
+version: "3.1"
+
+rules:
+
+# ====== BASIC RULES ======
+- rule: Say goodbye anytime the user says goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+- rule: Emergency situations get immediate priority
+  steps:
+  - intent: emergency_help
+  - action: action_emergency_protocol
+  - action: utter_triage_emergency
+
+- rule: Out of scope questions
+  steps:
+  - intent: out_of_scope
+  - action: utter_out_of_scope
+
+- rule: Bot challenge response
+  steps:
+  - intent: bot_challenge
+  - action: utter_default
+
+- rule: Always provide privacy assurance when asked
+  steps:
+  - intent: ask_privacy_policy
+  - action: utter_privacy_assurance
+
+- rule: Always honor human handover requests
+  steps:
+  - intent: request_human_handover
+  - action: action_initiate_handover
+
+- rule: Provide clinic hours when asked
+  steps:
+  - intent: ask_clinic_hours
+  - action: utter_clinic_hours
+
+- rule: Provide clinic services when asked
+  steps:
+  - intent: ask_services
+  - action: utter_clinic_services
+
+- rule: Provide health advice when requested
+  steps:
+  - intent: ask_health_advice
+  - action: action_provide_health_advice
+
+- rule: Provide triage explanation when requested
+  steps:
+  - intent: ask_triage_explanation
+  - action: action_explain_triage
+

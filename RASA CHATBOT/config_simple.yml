@@ -1,0 +1,99 @@
+# Simple Configuration for Healthcare Triage Chatbot
+# GitHub Repository: https://github.com/user/healthcare-chatbot
+# MSc AI Assignment - Lightweight Configuration (No Internet Required)
+
+language: en
+
+# Lightweight pipeline without BERT
+pipeline:
+  # Tokenization
+  - name: WhitespaceTokenizer
+  
+  # Regular expression feature extraction
+  - name: RegexFeaturizer
+  
+  # Lexical syntactic featurizer
+  - name: LexicalSyntacticFeaturizer
+  
+  # Count vectors featurizer
+  - name: CountVectorsFeaturizer
+    analyzer: char_wb
+    min_ngram: 1
+    max_ngram: 4
+  
+  # Additional count vectors for word-level features
+  - name: CountVectorsFeaturizer
+    analyzer: word
+    min_ngram: 1
+    max_ngram: 2
+  
+  # DIET Classifier for intent classification and entity extraction
+  - name: DIETClassifier
+    epochs: 100
+    constrain_similarities: true
+    model_confidence: softmax
+    loss_type: cross_entropy
+    similarity_type: auto
+    ranking_length: 10
+    maximum_positive_similarity: 0.8
+    maximum_negative_similarity: -0.4
+    # Simplified settings (no transformer)
+    entity_recognition: true
+    intent_classification: true
+    use_sparse_features: true
+    use_dense_features: true
+    drop_rate: 0.2
+    weight_sparsity: 0.8
+    evaluate_every_number_of_epochs: 20
+  
+  # Entity synonyms
+  - name: EntitySynonymMapper
+  
+  # Response selector
+  - name: ResponseSelector
+    epochs: 50
+    constrain_similarities: true
+    model_confidence: softmax
+  
+  # Fallback classifier
+  - name: FallbackClassifier
+    threshold: 0.3
+    ambiguity_threshold: 0.1
+
+# Core dialogue management policies
+policies:
+  # Memoization policy
+  - name: MemoizationPolicy
+    max_history: 5
+  
+  # Augmented memoization
+  - name: AugmentedMemoizationPolicy
+    max_history: 4
+  
+  # Rule-based policy
+  - name: RulePolicy
+    core_fallback_threshold: 0.4
+    core_fallback_action_name: "action_default_fallback"
+    enable_fallback_prediction: true
+  
+  # TED Policy (simplified)
+  - name: TEDPolicy
+    max_history: 5
+    epochs: 50
+    constrain_similarities: true
+    model_confidence: softmax
+    loss_type: cross_entropy
+    similarity_type: auto
+    ranking_length: 10
+    maximum_positive_similarity: 0.8
+    maximum_negative_similarity: -0.4
+    drop_rate: 0.2
+    weight_sparsity: 0.8
+    evaluate_every_number_of_epochs: 20
+    use_sparse_features: true
+    use_dense_features: true
+    entity_recognition: false
+    intent_classification: false
+
+# Assistant ID
+assistant_id: healthcare_triage_chatbot_simple

@@ -1,0 +1,37 @@
+# Endpoints Configuration for Healthcare Chatbot
+# GitHub Repository: https://github.com/user/healthcare-chatbot
+
+# Action server endpoint
+action_endpoint:
+  url: "http://localhost:5055/webhook"
+
+# Rasa X / Enterprise endpoint (optional)
+# rasa_x_endpoint:
+#   url: "http://localhost:5002/api"
+
+# Model server endpoint (optional)
+# model_endpoint:
+#   url: "http://localhost:5005"
+
+# Tracker store (optional - for conversation persistence)
+# tracker_store:
+#   type: sql
+#   dialect: "postgresql"
+#   url: "postgresql://username:password@localhost:5432/rasa"
+#   db: "rasa"
+#   username: "rasa_user"
+#   password: "rasa_password"
+
+# Event broker (optional - for real-time events)
+# event_broker:
+#   type: "kafka"
+#   url: "localhost"
+#   topic: "rasa_events"
+
+# Lock store (optional - for concurrent access)
+# lock_store:
+#   type: "redis"
+#   url: "localhost"
+#   port: 6379
+#   db: 0
+

@@ -1,0 +1,183 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - report_symptom
+  - emergency_help
+  - book_appointment
+  - modify_appointment
+  - cancel_appointment
+  - check_appointment
+  - ask_health_advice
+  - request_human_handover
+  - provide_feedback
+  - ask_triage_explanation
+  - ask_clinic_hours
+  - ask_location
+  - ask_services
+  - ask_privacy_policy
+  - out_of_scope
+  - bot_challenge
+
+entities:
+  - symptom
+  - severity
+  - duration
+  - body_part
+  - appointment_date
+  - appointment_time
+  - doctor_type
+  - patient_name
+
+slots:
+  current_symptoms:
+    type: list
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: symptom
+
+  symptom_severity:
+    type: categorical
+    values: ["mild", "moderate", "severe", "critical"]
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: severity
+
+  appointment_date:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: appointment_date
+
+  appointment_time:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: appointment_time
+
+  triage_priority:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: custom
+
+  last_symptoms:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: custom
+
+  appointment_reference:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: custom
+
+  appointment_booked:
+    type: bool
+    influence_conversation: true
+    mappings:
+    - type: custom
+
+  emergency_triggered:
+    type: bool
+    influence_conversation: true
+    mappings:
+    - type: custom
+
+  human_handover_requested:
+    type: bool
+    influence_conversation: true
+    mappings:
+    - type: custom
+
+  feedback_collected:
+    type: bool
+    influence_conversation: false
+    mappings:
+    - type: custom
+
+responses:
+  utter_greet:
+    - text: "Hello! I'm your healthcare assistant. How can I help you today? 🏥"
+    - text: "Hi there! Welcome to our healthcare service. What can I assist you with?"
+    - text: "Good day! I'm here to help with your healthcare needs. How may I assist you?"
+
+  utter_goodbye:
+    - text: "Thank you for using our healthcare service. Take care! 💙"
+    - text: "Goodbye! Wishing you good health. Don't hesitate to reach out if you need us."
+    - text: "Take care of yourself! Our healthcare team is always here when you need us."
+
+  utter_default:
+    - text: "I didn't understand that. Can you please rephrase your healthcare question?"
+    - text: "I'm not sure what you mean. Could you tell me more about your health concern?"
+    - text: "Let me help you better. Can you rephrase your question about your health or appointments?"
+
+  utter_out_of_scope:
+    - text: "I specialize in healthcare questions and appointments. How can I assist you with your health today?"
+    - text: "I'm focused on helping with medical concerns and healthcare services. What health-related question can I answer?"
+    - text: "Let's keep our conversation focused on your health and medical needs. How can I help you?"
+
+  utter_triage_emergency:
+    - text: "🚨 This is a medical emergency. Please call 911 immediately!"
+
+  utter_clinic_hours:
+    - text: "📅 Our clinic hours: Monday-Friday 8:00 AM to 6:00 PM, Saturday 9:00 AM to 2:00 PM. Closed Sundays."
+    - text: "🕐 We're open Monday through Friday 8 AM - 6 PM, and Saturday mornings 9 AM - 2 PM."
+
+  utter_clinic_services:
+    - text: "🏥 We offer: General Practice, Preventive Care, Health Consultations, Chronic Disease Management, and Wellness Programs."
+    - text: "Our services include: Family Medicine, Health Screenings, Immunizations, Minor Procedures, and Telemedicine Consultations."
+
+  utter_clinic_location:
+    - text: "📍 Main Clinic: 123 Health Street, Wellness City, HC 12345. Free parking available. Accessible entrance on the south side."
+    - text: "🗺️ Find us at 123 Health Street, Wellness City. We're next to the pharmacy, with easy access and parking."
+
+  utter_privacy_assurance:
+    - text: "🔒 Your privacy is fully protected. This conversation follows HIPAA guidelines and healthcare privacy standards."
+    - text: "Your personal health information is secure and confidential, following all medical privacy regulations."
+
+  utter_human_handover:
+    - text: "👥 Let me connect you with a healthcare professional who can provide personalized assistance."
+
+  utter_appointment_confirmed:
+    - text: "✅ Your appointment has been confirmed! You'll receive a confirmation message shortly."
+    - text: "Great! Your appointment is confirmed. We look forward to seeing you."
+
+  utter_appointment_cancelled:
+    - text: "❌ Your appointment has been successfully cancelled. No fees apply."
+    - text: "Your appointment cancellation is complete. Feel free to reschedule anytime."
+
+  utter_feedback_thanks:
+    - text: "🙏 Thank you for your valuable feedback! It helps us improve our healthcare services."
+    - text: "We appreciate your feedback! Your input helps us provide better patient care."
+
+  utter_iamabot:
+    - text: "I'm an AI healthcare assistant designed to help with medical questions and appointments. How can I assist you today?"
+    - text: "I'm a healthcare chatbot powered by AI. I'm here to help with your health concerns and medical appointments."
+
+  utter_ask_privacy_policy:
+    - text: "🔒 We follow strict healthcare privacy standards (HIPAA compliant). Your information is secure and only used for your care."
+
+actions:
+  - action_perform_triage
+  - action_book_appointment
+  - action_emergency_protocol
+  - action_provide_health_advice
+  - action_check_appointment
+  - action_modify_appointment
+  - action_cancel_appointment
+  - action_initiate_handover
+  - action_collect_feedback
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+

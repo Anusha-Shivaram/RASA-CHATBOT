@@ -1,0 +1,41 @@
+version: "3.1"
+
+nlu:
+- intent: greet
+  examples: |
+    - hello
+    - hi
+    - hey
+    - good morning
+    - good afternoon
+
+- intent: goodbye
+  examples: |
+    - goodbye
+    - bye
+    - see you later
+    - thanks, bye
+    - goodbye for now
+
+- intent: report_symptom
+  examples: |
+    - I have a headache
+    - My stomach hurts
+    - I'm feeling dizzy
+    - I have chest pain
+    - My throat is sore
+
+- intent: book_appointment
+  examples: |
+    - I need an appointment
+    - Can I book an appointment
+    - Schedule me an appointment
+    - I want to see a doctor
+
+- intent: emergency_help
+  examples: |
+    - This is an emergency
+    - I need help now
+    - Call 911
+    - Emergency
+

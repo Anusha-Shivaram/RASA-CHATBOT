@@ -1,0 +1,28 @@
+version: "3.1"
+
+stories:
+
+- story: simple greeting
+  steps:
+  - intent: greet
+  - action: utter_greet
+
+- story: symptom reporting
+  steps:
+  - intent: report_symptom
+  - action: action_perform_triage
+
+- story: book appointment
+  steps:
+  - intent: book_appointment
+  - action: action_book_appointment
+
+- story: emergency
+  steps:
+  - intent: emergency_help
+  - action: action_emergency_protocol
+
+- story: goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
