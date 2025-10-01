@@ -1,0 +1,23 @@
+# Simplified Healthcare Chatbot Dependencies
+# GitHub Repository: https://github.com/user/healthcare-chatbot
+# MSc AI Assignment - Core Requirements Only
+
+# Core Rasa Framework
+rasa[full]==3.6.0
+rasa-sdk==3.6.0
+
+# Essential packages only (avoiding build issues)
+# These are automatically installed with Rasa
+# transformers
+# torch
+# numpy
+# pandas
+# scikit-learn
+# requests
+# aiohttp
+
+# Development & Testing (optional)
+pytest>=7.0.0
+black>=22.0.0
+flake8>=5.0.0
+
